@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>任务灵体运行面板</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <section class="panel queue-panel">
+        <header>
+          <h2>运行列表</h2>
+          <p class="hint">拖动右侧的卡片到这里，按按钮控制执行。</p>
+        </header>
+        <div
+          id="queueDropZone"
+          class="drop-zone"
+          data-dropzone
+        >
+          <div id="queueList" class="queue-list"></div>
+        </div>
+        <div class="controls">
+          <button id="runOnceBtn">运行一个</button>
+          <button id="runAllBtn">运行全部</button>
+          <button id="runEndlessBtn">Endless 运行</button>
+          <button id="stopBtn" class="danger">停止</button>
+        </div>
+        <div class="status-line">
+          <span>模式：<strong id="modeDisplay">idle</strong></span>
+          <span class="dot" id="runningIndicator" title="执行状态"></span>
+        </div>
+      </section>
+
+      <section class="panel cards-panel">
+        <header>
+          <h2>可选灵体卡片</h2>
+          <p class="hint">双击卡片放大查看，拖动到左侧加入运行序列。</p>
+        </header>
+        <div class="cards-toolbar">
+          <button id="toggleEditorBtn" class="secondary">管理卡片库</button>
+        </div>
+        <div id="cardsList" class="cards-list"></div>
+        <div id="cardEditor" class="card-editor" hidden>
+          <div class="editor-header">
+            <h3>卡片库管理</h3>
+            <button id="cardEditorClose" class="secondary">收起</button>
+          </div>
+          <div class="editor-body">
+            <div class="editor-list" id="cardEditorList"></div>
+            <form id="cardEditorForm" class="editor-form">
+              <h4 id="cardEditorTitle">新建灵体卡片</h4>
+              <label>
+                名称
+                <input id="cardEditorName" name="name" type="text" placeholder="输入卡片名称" required />
+              </label>
+              <label>
+                描述
+                <textarea
+                  id="cardEditorDescription"
+                  name="description"
+                  rows="2"
+                  placeholder="用于说明该卡片的功能"
+                ></textarea>
+              </label>
+              <label>
+                代码（需定义 <code>async def run(log):</code>）
+                <textarea
+                  id="cardEditorSource"
+                  name="source"
+                  rows="10"
+                  placeholder="import asyncio&#10;&#10;async def run(log):&#10;    await log('Hello')"
+                  required
+                ></textarea>
+              </label>
+              <div class="editor-actions">
+                <button id="cardEditorSubmit" type="submit">创建卡片</button>
+                <button id="cardEditorReset" type="button" class="secondary">重置表单</button>
+              </div>
+            </form>
+          </div>
+          <p class="editor-hint">
+            保存后即可在右侧列表中拖入新卡片。运行时会即时加载最新代码。
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <section class="output-panel">
+      <header>
+        <h2>运行输出</h2>
+        <div class="output-actions">
+          <button id="clearOutputBtn">清除输出</button>
+        </div>
+      </header>
+      <div id="outputLog" class="output-log"></div>
+    </section>
+
+    <template id="cardTemplate">
+      <article class="card" draggable="true">
+        <h3 data-card-name></h3>
+        <p data-card-description></p>
+        <div class="card-actions">
+          <button data-add-button>加入运行</button>
+        </div>
+      </article>
+    </template>
+
+    <template id="queueItemTemplate">
+      <div class="queue-item">
+        <div class="queue-label">
+          <span class="queue-order" data-order></span>
+          <strong data-name></strong>
+        </div>
+        <div class="queue-status" data-status></div>
+        <button class="remove-btn" data-remove>&times;</button>
+      </div>
+    </template>
+
+    <template id="logRowTemplate">
+      <div class="log-row">
+        <span class="log-meta" data-meta></span>
+        <pre class="log-message" data-message></pre>
+      </div>
+    </template>
+
+    <template id="cardEditorRowTemplate">
+      <div class="editor-row">
+        <div class="editor-row-text">
+          <strong data-editor-name></strong>
+          <code data-editor-id></code>
+          <p data-editor-description></p>
+        </div>
+        <div class="editor-row-actions">
+          <button data-editor-edit>编辑</button>
+          <button data-editor-delete class="danger">删除</button>
+        </div>
+      </div>
+    </template>
+
+    <script src="/static/app.js" type="module"></script>
+  </body>
+</html>

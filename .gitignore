@@ -1,0 +1,31 @@
+# Bytecode / cache
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Python tooling
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+pip-wheel-metadata/
+
+# Node tooling (in case frontend tooling is added later)
+node_modules/
+dist/
+build/
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+
+# Editor files
+.idea/
+.vscode/
+
+# Local environment
+.env
+.env.*
