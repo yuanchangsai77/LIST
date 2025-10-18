@@ -29,3 +29,12 @@ Thumbs.db
 # Local environment
 .env
 .env.*
+
+# Local model binaries
+localmodel/models/*.gguf
+localmodel/models/*.ggml
+localmodel/models/*.bin
+localmodel/models/*.safetensors
+localmodel/models/*.pt
+localmodel/models/*.pth
+localmodel/models/*.ckpt

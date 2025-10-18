@@ -1,0 +1,140 @@
+# GPT-OSS 配置文件
+# 修改此文件后无需重启，下次运行时自动生效
+
+# 模型配置
+model:
+  # 默认模型路径（如果不存在会自动查找其他模型）
+  default_path: "models/gpt-oss-20b-Q4_0.gguf"
+  # 备选模型路径列表
+  fallback_paths:
+    - "models/gpt-oss-20b-mxfp4.gguf"
+    - "models/gpt-oss-*.gguf"
+
+# 生成参数
+generation:
+  # 默认最大 token 数
+  max_tokens: 1024
+  # 温度参数 (0.1-1.0，越低越确定，越高越创造性)
+  temperature: 0.7
+  # Top-p 核采样参数
+  top_p: 0.9
+  # 上下文长度
+  context_length: 4096
+  # 重复惩罚
+  repeat_penalty: 1.0
+
+# 系统提示词配置
+system_prompts:
+  # 默认系统提示词
+  default: |
+    You are ChatGPT, a large language model trained by OpenAI.
+    Knowledge cutoff: 2024-06
+    Current date: 2025-01-27
+
+    Reasoning: high
+
+    # Valid channels: analysis, commentary, final. Channel must be included for every message.
+
+  # 编程助手模式
+  coding: |
+    You are an expert programming assistant. You help users with coding questions, debugging, and software development.
+    Always provide clear, well-commented code examples and explain your reasoning.
+    
+    Knowledge cutoff: 2024-06
+    Current date: 2025-01-27
+
+  # 创意写作模式
+  creative: |
+    You are a creative writing assistant. You help users with storytelling, poetry, and creative content.
+    Be imaginative, expressive, and help users explore their creativity.
+    
+    Knowledge cutoff: 2024-06
+    Current date: 2025-01-27
+
+  # 学术助手模式
+  academic: |
+    You are an academic research assistant. You help with research, analysis, and academic writing.
+    Provide well-structured, evidence-based responses with proper reasoning.
+    
+    Knowledge cutoff: 2024-06
+    Current date: 2025-01-27
+
+  # 简洁模式
+  concise: |
+    You are a helpful assistant. Provide concise, direct answers without unnecessary elaboration.
+    Be accurate and to the point.
+
+# 开发者指令配置
+developer_instructions:
+  # 默认指令
+  default: "请用中文回答问题，保持友好和有帮助的语气。"
+  
+  # 英文模式
+  english: "Please respond in English. Be helpful and friendly."
+  
+  # 编程模式
+  coding: "请用中文回答编程相关问题。提供清晰的代码示例和详细解释。"
+  
+  # 创意模式
+  creative: "请用中文进行创意写作。发挥想象力，创造有趣的内容。"
+  
+  # 学术模式
+  academic: "请用中文回答学术问题。提供结构化、有依据的回答。"
+
+# 预设配置模式
+presets:
+  # 默认对话模式
+  default:
+    system_prompt: "default"
+    developer_instruction: "default"
+    temperature: 0.7
+    max_tokens: 256
+    
+  # 编程助手模式
+  coding:
+    system_prompt: "coding"
+    developer_instruction: "coding"
+    temperature: 0.3
+    max_tokens: 512
+    
+  # 创意写作模式
+  creative:
+    system_prompt: "creative"
+    developer_instruction: "creative"
+    temperature: 0.9
+    max_tokens: 400
+    
+  # 学术研究模式
+  academic:
+    system_prompt: "academic"
+    developer_instruction: "academic"
+    temperature: 0.5
+    max_tokens: 600
+    
+  # 简洁回答模式
+  concise:
+    system_prompt: "concise"
+    developer_instruction: "default"
+    temperature: 0.3
+    max_tokens: 100
+
+# 界面配置
+interface:
+  # 是否显示详细信息
+  show_details: true
+  # 是否显示参数信息
+  show_params: true
+  # 是否使用彩色输出
+  use_colors: true
+  # 提示符
+  user_prompt: "👤 你: "
+  assistant_prompt: "🤖 助手: "
+
+# 高级配置
+advanced:
+  # 是否启用 Harmony 格式
+  use_harmony_format: true
+  # 是否显示生成统计
+  show_stats: true
+  # 日志级别 (debug, info, warn, error)
+  log_level: "info"
